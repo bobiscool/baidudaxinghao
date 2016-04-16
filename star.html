@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .star {
+            display: inline-block;
+            margin: 10px;
+            background: url("off.png") no-repeat center;
+            width: 34px;
+            height: 31px;
+        }
+
+        .low {
+            display: inline-block;
+            filter: alpha(opacity=80);
+            background:url("off2.png") no-repeat center;
+            opacity: 0.5;
+            margin: 10px;
+            width: 34px;
+            height: 31px;
+        }
+
+        .high {
+            background: url("on.png") no-repeat center;
+            margin: 10px;
+            width: 34px;
+            height: 31px;
+            display: inline-block;
+        }
+
+    </style>
+
+
+    <script>
+        window.onload =function() {
+            var aLi = document.getElementsByTagName('li');
+            var onOff = true;
+            for (var i = 0; i < aLi.length; i++) {
+                aLi[i].index = i;
+                aLi[i].clinum = 0;
+            }//定义序列号
+
+            for (var k = 0; k < aLi.length; k++) {
+                aLi[k].clinum =0;
+                aLi[k].onclick = function (){
+                    this.clinum ++;
+                    if (this.clinum%2==1){
+                        onOff =false;
+                        if (this.index <= 2) {
+                            // alert(this.index);
+                            for(var j = 0; j <= this.index; j++){
+                                aLi[j].style = 'low';
+                            }
+                        }else{
+                            for(var j = 0;j <= this.index;j++)
+                            {
+                                aLi[j].className = "high";
+                            }
+                        }
+                    } else {
+                        onOff = true;
+                    }
+
+                };//鼠标点击
+            }
+
+
+            for(var n =0;n<aLi.length;n++) {
+                //alert(n);
+                aLi[n].onmouseover = function () {
+                    //alert(this.index);
+                    if(onOff) {
+                        if (this.index <= 2) {
+                            // alert(this.index);
+                            for (var j = 0; j <= this.index; j++) {
+                                aLi[j].className = 'low';
+                            }
+                        } else {
+                            for (var j = 0; j <= this.index; j++) {
+                                aLi[j].className = "high";
+                            }
+                        }
+                    }
+                };//鼠标移入
+
+
+                aLi[n].onmouseout = function (){
+                    if (onOff) {
+                        for (var j = 0; j <= this.index; j++) {
+                            aLi[j].className = 'star';
+                        }
+                    }
+                    ;//鼠标移出
+                }
+            };
+
+            //mouse over 功能 是建立在 on的基础上的
+
+        };
+
+
+    </script>
+</head>
+<body>
+<ul>
+    <li class="star"></li>
+    <li class="star"></li>
+    <li class="star"></li>
+    <li class="star"></li>
+    <li class="star"></li>
+    <li class="star"></li>
+    <li class="star"></li>
+</ul>
+</body>
+</html>
